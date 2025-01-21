@@ -49,7 +49,7 @@
                 <button pButton severity="success" type="submit" label="Register" class="w-full"
                     [disabled]="!registerForm.valid"></button>
                 <p-message severity="success" variant="simple" size="small">
-                    <span class="text-white"> Do you have an account?</span> Login here
+                    <span class="text-white"> Do you have an account?</span>  <a [routerLink]="['/auth/login']" routerLinkActive="router-link-active" > Login here</a>
                 </p-message>
             </div>
         </form>

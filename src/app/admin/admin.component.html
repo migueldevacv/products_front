@@ -24,8 +24,9 @@
             <div class="px-1"><p-divider/></div>
             <button pRipple class="relative w-full overflow-hidden border-0 bg-transparent flex items-start px-2 pb-4 ">
                 <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" class="mr-2" shape="circle" />
-                <span class="flex flex-col">
+                <span class="flex flex-row align-middle content-center items-center">
                     <span class="text-sm font-bold">{{user && user.name}}</span>
+                    <p-button icon="pi pi-sign-in"  (onClick)="logout()" link="true"/>
                 </span>
             </button>
         </ng-template>

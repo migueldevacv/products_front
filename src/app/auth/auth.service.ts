@@ -77,13 +77,16 @@ export class AuthService {
   createSessionInterval() {
     if (!this.sessionInterval) {
       this.sessionInterval = setInterval(() => {
-        if (!this.isLoggedIn() && (this._router.url != '/auth/login' && this._router.url != '/auth/register')) {
-          this.logout()
-        } else {
-          if (this._router.url == '/auth/login' || this._router.url == '/auth/register') {
-            this._router.navigate(['/app'])
+        if (!this.isLoggedIn()) {
+          if (this._router.url != '/auth/login' && this._router.url != '/auth/register') {
+            this.logout()
+            return
           }
-        }
+          if (this._router.url == '/auth/login' || this._router.url == '/auth/register') {
+            return
+          }
+          this._router.navigate(['/app'])
+        } 
       }, 1000)
     }
   }

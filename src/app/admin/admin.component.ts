@@ -59,4 +59,8 @@ export class AdminComponent implements OnInit {
     this.isUserInactive = false;
     this._inactiveUserservice.reset();
   }
+
+  logout() {
+    this._authService.logout()
+  }
 }

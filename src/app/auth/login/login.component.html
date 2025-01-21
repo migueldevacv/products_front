@@ -39,7 +39,7 @@
                 <button pButton severity="success" type="submit" label="Login" class="w-full"
                 [disabled]="!loginForm.valid" [raised]="true" [loading]="loading()"></button>
                 <p-message severity="success" variant="simple" size="small">
-                    <span class="text-white">Do you not have an account? </span> Register here
+                    <span class="text-white">Do you not have an account? </span> <a [routerLink]="['/auth/register']">Register here</a> 
                 </p-message>
             </div>
         </form>
