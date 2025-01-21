@@ -63,8 +63,8 @@ export class AuthService {
     this.sessionClosed.emit(true)
     this.clearSessionInterval()
     setTimeout(() => {
-      this._router.navigateByUrl('auth/login');
       this._cookieService.deleteAll();
+      this._router.navigateByUrl('auth/login');
       this.sessionClosed = new EventEmitter<boolean>();
     }, 1000)
   }
