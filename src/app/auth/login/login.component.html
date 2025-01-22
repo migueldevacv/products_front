@@ -37,7 +37,7 @@
             </div>
             <div class="ui-grid-row w-full grid grid-cols-1 justify-items-center gap-3">
                 <button pButton severity="success" type="submit" label="Login" class="w-full"
-                [disabled]="!loginForm.valid"></button>
+                [disabled]="!loginForm.valid" [raised]="true" [loading]="loading()"></button>
                 <p-message severity="info" variant="simple" size="small">
                     Do you not have an account? Register here
                 </p-message>

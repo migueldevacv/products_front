@@ -22,8 +22,9 @@ import { Message } from 'primeng/message';
     FloatLabel,
     IconField,
     InputIcon,
-    Message
+    Message,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: []
 })
-export class AuthModule {}
+export class AuthModule { }
