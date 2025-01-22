@@ -1,0 +1,46 @@
+<div class="w-full h-[100dvh] grid grid-cols-1 content-center place-items-center">
+    <div class="bg-slate-600 pt-8 rounded-2xl w-1/2">
+        <div class="w-full justify-center content-center text-center">
+            <span class="pi pi-user " style="font-size: 1.6em;"></span>
+            <span class="text-3xl">
+                Register
+            </span>
+        </div>
+        <form class="grid grid-cols-1 gap-10 p-10" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+            <div class="grid grid-cols-1 gap-2">
+                <p-floatlabel variant="in">
+                    <p-iconfield>
+                        <p-inputicon class="pi pi-user" />
+                        <input pInputText type="email" id="email" [fluid]="true" name="email" formControlName="email"
+                            autocomplete="off" />
+                    </p-iconfield>
+                    <label for="email">Email</label>
+                </p-floatlabel>
+                <p-message [hidden]="loginForm.controls['email'].valid || !loginForm.controls['email'].dirty"
+                    severity="error" variant="simple" size="small" class="error">
+                    @if(loginForm.controls['email'].errors?.['required']){<span>Email required</span>}
+                    @if(loginForm.controls['email'].errors?.['email']){<span>The text is not an email</span>}
+                </p-message>
+            </div>
+            <div class="grid grid-cols-1 gap-2">
+                <p-floatlabel variant="in">
+                    <p-iconfield>
+                        <p-inputicon class="pi pi-key" />
+                        <input pInputText type="password" id="password" [fluid]="true" name="password"
+                            formControlName="password" autocomplete="off" />
+                    </p-iconfield>
+                    <label for="password">Password</label>
+                </p-floatlabel>
+                <p-message [hidden]="loginForm.controls['password'].valid || !loginForm.controls['password'].dirty"
+                    severity="error" variant="simple" size="small">Password required</p-message>
+            </div>
+            <div class="ui-grid-row w-full grid grid-cols-1 justify-items-center gap-3">
+                <button pButton severity="success" type="submit" label="Login" class="w-full"
+                    [disabled]="!loginForm.valid"></button>
+                <p-message severity="info" variant="simple" size="small">
+                    Do you have an account? Login here
+                </p-message>
+            </div>
+        </form>
+    </div>
+</div>
