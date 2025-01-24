@@ -5,18 +5,19 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { IntUser } from '../interfaces/Auth/UserInterface';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   sessionClosed = new EventEmitter<boolean>();
+  sessionIntervalSet: Subject<boolean> = new Subject();
+  sessionInterval!: any
 
   authRoute: string = `${environment.domain}auth/`
 
-  constructor(private http: HttpClient, private _cookieService: CookieService, private _router: Router, private noty: MessageService) {
-  }
+  constructor(private http: HttpClient, private _cookieService: CookieService, private _router: Router) { }
 
   login(info: IntReqLogin) {
     return this.http.post<IntResLogin>(`${this.authRoute}login`, info)
@@ -58,11 +59,38 @@ export class AuthService {
     return !!this._cookieService.get('user');;
   }
 
-  logout(err: any) {
+  logout(err?: any) {
     this.sessionClosed.emit(true)
+    this.clearSessionInterval()
     setTimeout(() => {
       this._router.navigateByUrl('auth/login');
       this._cookieService.deleteAll();
+      this.sessionClosed = new EventEmitter<boolean>();
     }, 1000)
+  }
+
+  initSessionInterval() {
+    this.clearSessionInterval()
+    this.createSessionInterval()
+  }
+
+  createSessionInterval() {
+    if (!this.sessionInterval) {
+      this.sessionInterval = setInterval(() => {
+        if (!this.isLoggedIn() && (this._router.url != '/auth/login' && this._router.url != '/auth/register')) {
+          this.logout()
+        } else {
+          if (this._router.url == '/auth/login' || this._router.url == '/auth/register') {
+            this.clearSessionInterval()
+            this._router.navigate(['/app'])
+          }
+        }
+      }, 1000)
+    }
+  }
+
+  clearSessionInterval() {
+    clearInterval(this.sessionInterval)
+    this.sessionInterval = null
   }
 }

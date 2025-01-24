@@ -21,13 +21,13 @@ export class RegisterComponent {
 
   constructor(private _authService: AuthService, private _noty: NotificationService, private _router: Router) { }
 
-  ngOnInit() { }
+  ngOnInit() { this._authService.initSessionInterval() }
 
   onSubmit() {
     this.loading.set(true)
     this._authService.register(this.registerForm.value)
       .subscribe({
-        next: ({data, message}) => {
+        next: ({ data, message }) => {
           this._authService.setUser(data.user)
           this._authService.setToken(data.token)
           this._noty.bottomRight({ severity: 'success', summary: message }).show()

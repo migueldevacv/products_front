@@ -21,7 +21,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private _authService: AuthService, private _noty: NotificationService, private _router: Router) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this._authService.initSessionInterval()
+  }
 
   onSubmit() {
     this.loading.set(true)
