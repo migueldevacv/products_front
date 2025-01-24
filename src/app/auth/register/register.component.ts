@@ -28,11 +28,14 @@ export class RegisterComponent {
     this._authService.register(this.registerForm.value)
       .subscribe({
         next: ({data, message}) => {
+          this._authService.setUser(data.user)
           this._authService.setToken(data.token)
           this._noty.bottomRight({ severity: 'success', summary: message }).show()
-          this._router.navigate(['/dashboard'])
+          this.loading.update(l => false)
+          this._router.navigate(['/app'])
         },
         error: (error: ErrorInterface) => {
+          this.loading.update(l => false)
           this._noty.bottomRight({ severity: 'warn', summary: error.message, detail: error.errors[0] || '' }).show()
         },
         complete: () => {

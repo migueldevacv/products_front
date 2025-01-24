@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
           this._authService.setToken(data.token)
           this._noty.bottomRight({ severity: 'success', summary: message }).show()
           this.loading.update(l => false)
-          this._router.navigate(['/dashboard'])
+          this._router.navigate(['/app'])
         },
         error: (error: ErrorInterface) => {
           this.loading.update(l => false)
