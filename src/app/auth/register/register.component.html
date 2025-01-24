@@ -6,20 +6,31 @@
                 Register
             </span>
         </div>
-        <form class="grid grid-cols-1 gap-10 p-10" (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+        <form class="grid grid-cols-1 gap-10 p-10" (ngSubmit)="onSubmit()" [formGroup]="registerForm">
             <div class="grid grid-cols-1 gap-2">
                 <p-floatlabel variant="in">
                     <p-iconfield>
                         <p-inputicon class="pi pi-user" />
+                        <input pInputText type="text" id="name" [fluid]="true" name="name" formControlName="name" autocomplete="off" />
+                    </p-iconfield>
+                    <label for="name">Name</label>
+                </p-floatlabel>
+                <p-message [hidden]="registerForm.controls['name'].valid || !registerForm.controls['name'].dirty"
+                    severity="error" variant="simple" size="small">Password required</p-message>
+            </div>
+            <div class="grid grid-cols-1 gap-2">
+                <p-floatlabel variant="in">
+                    <p-iconfield>
+                        <p-inputicon class="pi pi-at" />
                         <input pInputText type="email" id="email" [fluid]="true" name="email" formControlName="email"
                             autocomplete="off" />
                     </p-iconfield>
                     <label for="email">Email</label>
                 </p-floatlabel>
-                <p-message [hidden]="loginForm.controls['email'].valid || !loginForm.controls['email'].dirty"
+                <p-message [hidden]="registerForm.controls['email'].valid || !registerForm.controls['email'].dirty"
                     severity="error" variant="simple" size="small" class="error">
-                    @if(loginForm.controls['email'].errors?.['required']){<span>Email required</span>}
-                    @if(loginForm.controls['email'].errors?.['email']){<span>The text is not an email</span>}
+                    @if(registerForm.controls['email'].errors?.['required']){<span>Email required</span>}
+                    @if(registerForm.controls['email'].errors?.['email']){<span>The text is not an email</span>}
                 </p-message>
             </div>
             <div class="grid grid-cols-1 gap-2">
@@ -31,14 +42,14 @@
                     </p-iconfield>
                     <label for="password">Password</label>
                 </p-floatlabel>
-                <p-message [hidden]="loginForm.controls['password'].valid || !loginForm.controls['password'].dirty"
+                <p-message [hidden]="registerForm.controls['password'].valid || !registerForm.controls['password'].dirty"
                     severity="error" variant="simple" size="small">Password required</p-message>
             </div>
             <div class="ui-grid-row w-full grid grid-cols-1 justify-items-center gap-3">
-                <button pButton severity="success" type="submit" label="Login" class="w-full"
-                    [disabled]="!loginForm.valid"></button>
-                <p-message severity="info" variant="simple" size="small">
-                    Do you have an account? Login here
+                <button pButton severity="success" type="submit" label="Register" class="w-full"
+                    [disabled]="!registerForm.valid"></button>
+                <p-message severity="success" variant="simple" size="small">
+                    <span class="text-white"> Do you have an account?</span> Login here
                 </p-message>
             </div>
         </form>

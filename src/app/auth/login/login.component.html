@@ -10,7 +10,7 @@
             <div class="grid grid-cols-1 gap-2">
                 <p-floatlabel variant="in">
                     <p-iconfield>
-                        <p-inputicon class="pi pi-user" />
+                        <p-inputicon class="pi pi-at" />
                         <input pInputText type="email" id="email" [fluid]="true" name="email" formControlName="email"
                             autocomplete="off" />
                     </p-iconfield>
@@ -38,8 +38,8 @@
             <div class="ui-grid-row w-full grid grid-cols-1 justify-items-center gap-3">
                 <button pButton severity="success" type="submit" label="Login" class="w-full"
                 [disabled]="!loginForm.valid" [raised]="true" [loading]="loading()"></button>
-                <p-message severity="info" variant="simple" size="small">
-                    Do you not have an account? Register here
+                <p-message severity="success" variant="simple" size="small">
+                    <span class="text-white">Do you not have an account? </span> Register here
                 </p-message>
             </div>
         </form>

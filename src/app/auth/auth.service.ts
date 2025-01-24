@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   register(info: IntReqRegister) {
-    return this.http.post<IntResRegister>(`${this.authRoute}login`, info)
+    return this.http.post<IntResRegister>(`${this.authRoute}register`, info)
   }
 
   setToken(token: string): void {

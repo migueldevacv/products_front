@@ -27,8 +27,9 @@ export class LoginComponent implements OnInit {
     this.loading.set(true)
     this._authService.login(this.loginForm.value)
       .subscribe({
-        next: (data) => {
-          this._noty.bottomRight({ severity: 'success', summary: data.message }).show()
+        next: ({ data, message }) => {
+          this._authService.setToken(data.token)
+          this._noty.bottomRight({ severity: 'success', summary: message }).show()
           this._router.navigate(['/dashboard'])
         },
         error: (error: ErrorInterface) => {
