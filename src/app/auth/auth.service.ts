@@ -77,7 +77,6 @@ export class AuthService {
   createSessionInterval() {
     if (!this.sessionInterval) {
       this.sessionInterval = setInterval(() => {
-        console.log(1);
         if (!this.isLoggedIn() && (this._router.url != '/auth/login' && this._router.url != '/auth/register')) {
           this.logout()
         } else {
