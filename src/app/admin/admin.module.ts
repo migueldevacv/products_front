@@ -34,10 +34,11 @@ import { InputNumber } from 'primeng/inputnumber';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { CategoriesComponent } from './categories/categories.component';
+import { UsersComponent } from './users/users.component';
 
 
 @NgModule({
-  declarations: [AdminComponent, ProductsComponent, CategoriesComponent],
+  declarations: [AdminComponent, ProductsComponent, CategoriesComponent, UsersComponent],
   imports: [
     FormsModule,
     CommonModule,

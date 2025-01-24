@@ -1,3 +1,8 @@
+import { IntResponse } from "../Response";
+
+export interface IntResUsers extends IntResponse {
+    data: IntUser[]
+}
 
 export interface IntUser {
     id:                number;

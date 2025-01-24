@@ -3,6 +3,7 @@ import { AdminComponent } from './admin.component';
 import { RouterModule, Routes } from '@angular/router';
 // import { ProductsComponent } from './products/products.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {
@@ -10,10 +11,10 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       // { path: 'products', component: ProductsComponent },
-      { path: 'categories', component: CategoriesComponent }
+      { path: 'categories', component: CategoriesComponent },
+      { path: 'users', component: UsersComponent },
     ]
   },
-  // { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({
