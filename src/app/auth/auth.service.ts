@@ -3,6 +3,7 @@ import { environment } from '../../env/enviroment.dev';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { IntUser } from '../interfaces/Auth/UserInterface';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,21 @@ export class AuthService {
 
   isLoggedIn() {
     return !!this.getJwtToken();
+  }
+
+  getUser() {
+    return this._cookieService?.get('user') ? JSON.parse(this._cookieService?.get('user')) as IntUser : null
+  }
+
+  setUser(newUser: IntUser) {
+    this._cookieService.set('user', JSON.stringify(newUser), 4, '/')
+  }
+
+  removeUser() {
+    this._cookieService.delete('user');
+  }
+
+  hasUser() {
+    return !!this._cookieService.get('user');;
   }
 }
