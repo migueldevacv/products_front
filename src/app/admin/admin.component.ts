@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from '../auth/auth.service';
 import { NotificationService } from '../global/services/notification.service';
+import { IntUser } from '../interfaces/Auth/UserInterface';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { NotificationService } from '../global/services/notification.service';
   styleUrl: './admin.component.css',
 })
 export class AdminComponent implements OnInit {
+  user!: IntUser | null
   router = inject(Router)
   items: MenuItem[] | undefined = [
     {
@@ -40,7 +42,7 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.user = this._authService.getUser()
     this._authService.sessionClosed.subscribe((lang) => {
       if (lang)
         this._noty.topRight({ severity: 'warn', summary: 'THE SESSION WAS CLOSED', detail: 'Please login again' })

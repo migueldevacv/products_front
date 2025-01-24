@@ -5,7 +5,7 @@
             <span class="flex flex-col">
                 <span class="inline-flex items-center gap-1 px-2 py-2">
                     <span class="text-md font-semibold">
-                        PRIME<span class="text-primary">APP</span>
+                        MIKE<span class="text-primary">APP</span>
                     </span>
                 </span>
                 <div class="my-[-15px] mx-1"><p-divider/></div>
@@ -25,7 +25,7 @@
             <button pRipple class="relative w-full overflow-hidden border-0 bg-transparent flex items-start px-2 pb-4 ">
                 <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" class="mr-2" shape="circle" />
                 <span class="flex flex-col">
-                    <span class="text-sm font-bold">Amy Elsner</span>
+                    <span class="text-sm font-bold">{{user && user.name}}</span>
                 </span>
             </button>
         </ng-template>
