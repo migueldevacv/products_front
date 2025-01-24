@@ -1,5 +1,8 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from '../auth/auth.service';
+import { NotificationService } from '../global/services/notification.service';
 
 
 @Component({
@@ -9,44 +12,39 @@ import { MenuItem } from 'primeng/api';
   styleUrl: './admin.component.css',
 })
 export class AdminComponent implements OnInit {
+  router = inject(Router)
   items: MenuItem[] | undefined = [
     {
-      label: 'Documents',
+      label: 'Catalogs',
       items: [
         {
-          label: 'New',
-          icon: 'pi pi-plus',
-          shortcut: '⌘+N'
+          label: 'Users',
+          icon: 'pi pi-user',
+          route: 'users'
         },
         {
-          label: 'Search',
-          icon: 'pi pi-search',
-          shortcut: '⌘+S'
-        }
-      ]
-    },
-    {
-      label: 'Profile',
-      items: [
-        {
-          label: 'Settings',
-          icon: 'pi pi-cog',
-          shortcut: '⌘+O'
+          label: 'Categories',
+          icon: 'pi pi-table',
+          route: 'categories'
         },
         {
-          label: 'Messages',
-          icon: 'pi pi-inbox',
-          badge: '2'
-        },
-        {
-          label: 'Logout',
-          icon: 'pi pi-sign-out',
-          shortcut: '⌘+Q'
+          label: 'Products',
+          icon: 'pi pi-box',
+          route: 'products'
         }
       ]
     },
   ];
 
+  constructor(private _authService: AuthService, private _noty: NotificationService) {
+  }
+
   ngOnInit() {
+
+    this._authService.sessionClosed.subscribe((lang) => {
+      if (lang)
+        this._noty.topRight({ severity: 'warn', summary: 'THE SESSION WAS CLOSED', detail: 'Please login again' })
+          .show()
+    })
   }
 }

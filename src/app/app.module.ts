@@ -5,12 +5,12 @@ import { RouterOutlet } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { Toast } from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 import { NotificationService } from './global/services/notification.service';
 
 @NgModule({
   declarations: [],
-  imports: [BrowserModule, CommonModule, AppRoutingModule, RouterOutlet, ReactiveFormsModule, Toast],
+  imports: [BrowserModule, CommonModule, AppRoutingModule, RouterOutlet, ReactiveFormsModule, ToastModule],
   providers: [MessageService, NotificationService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

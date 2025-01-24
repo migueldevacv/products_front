@@ -2,16 +2,20 @@ import { IntReqLogin, IntReqRegister, IntResLogin, IntResRegister } from '../int
 import { environment } from '../../env/enviroment.dev';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { IntUser } from '../interfaces/Auth/UserInterface';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  sessionClosed = new EventEmitter<boolean>();
+
   authRoute: string = `${environment.domain}auth/`
 
-  constructor(private http: HttpClient, private _cookieService: CookieService) {
+  constructor(private http: HttpClient, private _cookieService: CookieService, private _router: Router, private noty: MessageService) {
   }
 
   login(info: IntReqLogin) {
@@ -52,5 +56,13 @@ export class AuthService {
 
   hasUser() {
     return !!this._cookieService.get('user');;
+  }
+
+  logout(err: any) {
+    this.sessionClosed.emit(true)
+    setTimeout(() => {
+      this._router.navigateByUrl('auth/login');
+      this._cookieService.deleteAll();
+    }, 1000)
   }
 }

@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
         },
         error: (error: ErrorInterface) => {
           this.loading.update(l => false)
-          this._noty.bottomRight({ severity: 'warn', summary: error.message, detail: error.errors[0] || '' }).show()
+          this._noty.bottomRight({ severity: 'warn', summary: error.message, detail: error.errors?.[0] || '' }).show()
         },
         complete: () => {
           this.loading.update(l => false)

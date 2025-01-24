@@ -7,6 +7,7 @@ import { providePrimeNG } from 'primeng/config';
 import { provideRouter } from '@angular/router';
 import Aura from '@primeng/themes/aura';
 import { routes } from './app.routes';
+import { MessageService } from 'primeng/api';
 
 
 export const appConfig: ApplicationConfig = {
@@ -20,5 +21,6 @@ export const appConfig: ApplicationConfig = {
         preset: Aura,
       },
     }),
+    MessageService
   ],
 };
