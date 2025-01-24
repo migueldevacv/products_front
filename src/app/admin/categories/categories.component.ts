@@ -27,6 +27,7 @@ interface ExportColumn {
 })
 export class CategoriesComponent {
   statuses = [{ label: 'ACTIVE', value: 1 }, { label: 'INACTIVE', value: 0 }];
+  loadingTable = signal(false);
   categoryDialog: boolean = false;
   categories!: IntCategories[];
   submitted = signal(false);
@@ -48,8 +49,10 @@ export class CategoriesComponent {
   exportCSV() {/* this.dt.exportCSV(); */ }
 
   getCategories() {
+    this.loadingTable.set(true)
     this._categoriesService.get().subscribe(({ data }) => {
       this.categories = data;
+      this.loadingTable.update(l => false)
     });
   }
 

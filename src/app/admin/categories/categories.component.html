@@ -25,6 +25,7 @@
         [size]="'small'"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [showCurrentPageReport]="true"
+        [loading]="loadingTable()"
     >
         <ng-template #caption>
             <div class="flex items-center justify-between">
