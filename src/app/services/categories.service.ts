@@ -27,4 +27,8 @@ export class CategoriesService {
   delete(id: number) {
     return this.http.delete<IntResCategories>(`${this.catalogs}categories/${id}`)
   }
+
+  getActive() {
+    return this.http.get<IntResCategories>(`${this.catalogs}active/categories`)
+  }
 };

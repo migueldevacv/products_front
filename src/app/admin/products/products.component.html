@@ -92,10 +92,10 @@
                 </div>
 
                 <div>
-                    <label for="status" class="block font-bold mb-3">Inventory Status</label>
-                    <!-- <p-select [(ngModel)]="product.status" inputId="status" [options]="statuses" optionLabel="label" placeholder="Select a Status" fluid /> -->
+                    <label for="category_id" class="block font-bold mb-3">Product category</label>
+                    <p-select optionLabel="description" [(ngModel)]="product.category_id" inputId="category_id" optionValue="id" [options]="categories" placeholder="Select a category" fluid />
                 </div>
-
+<!-- 
                 <div>
                     <span class="block font-bold mb-4">Category</span>
                     <div class="grid grid-cols-12 gap-4">
@@ -116,7 +116,7 @@
                             <label for="category4">Fitness</label>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="grid grid-cols-12 gap-4">
                     <div class="col-span-6">

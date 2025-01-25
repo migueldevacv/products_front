@@ -27,4 +27,8 @@ export class ProductsService {
   delete(id: number) {
     return this.http.delete<IntResProducts>(`${this.catalogs}products/${id}`)
   }
+
+  exportXlsx() {
+    return this.http.get(`${this.catalogs}export/xlsx/products`, { responseType: 'blob' })
+  }
 };

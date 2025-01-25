@@ -6,6 +6,8 @@ import { IntProduct } from '../../interfaces/Catalogs/ProductsInterface';
 import { AuthService } from '../../auth/auth.service';
 import { NotificationService } from '../../global/services/notification.service';
 import { ErrorInterface } from '../../global/interfaces/ErrorInterface';
+import { IntCategories } from '../../interfaces/Catalogs/CategoriesInterface';
+import { CategoriesService } from '../../services/categories.service';
 
 interface Column {
   field: string;
@@ -26,6 +28,7 @@ interface ExportColumn {
   providers: [ProductsService, MessageService, ConfirmationService,]
 })
 export class ProductsComponent implements OnInit {
+  categories!: IntCategories[];
   loadingTable = signal(false);
   submitted = signal(false);
   loading = signal(false);
@@ -35,6 +38,13 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts()
+    this.getCategories()
+  }
+
+  getCategories(): void {
+    this._categoriesService.getActive().subscribe(({ data }) => {
+      this.categories = data;
+    });
   }
 
   getProducts(): void {
@@ -46,13 +56,28 @@ export class ProductsComponent implements OnInit {
   }
 
   constructor(
+    private _categoriesService: CategoriesService,
     private _productService: ProductsService,
     private _confirmationService: ConfirmationService,
     private _noty: NotificationService
   ) {
   }
 
-  exportCSV() {/* this.dt.exportCSV(); */ }
+  exportCSV() {
+    this._productService.exportXlsx().subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'products.xlsx'; // Nombre del archivo
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (error: ErrorInterface) => {
+        this._noty.bottomRight({ severity: 'warn', summary: error.message, detail: error.errors[0] || '' }).show()
+      }
+    })
+  }
 
   openNew() {
     this.product = {} as IntProduct;
